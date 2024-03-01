@@ -1,23 +1,52 @@
-class RapidTestOrder {
+class PoutineOrder {
   constructor(sFrom) {
     this.OrderState = {
       WELCOMING: () => {
         let aReturn = [];
-        this.stateCur = this.OrderState.RESERVING;
-        aReturn.push("Welcome to Rich's Rapid Test.");
-        aReturn.push("Would you like to reserve a rapid test kit?");
+        this.stateCur = this.OrderState.ORDERING;
+        aReturn.push("Welcome to Niek's Poutine!");
+        aReturn.push("Would you like to order a spicy or regular poutine?");
         return aReturn;
       },
-      RESERVING: (sInput) => {
+      
+      ORDERING: (sInput) => {
+        let aReturn = [];
+        this.stateCur = this.OrderState.SIZE;
+                if (sInput.toLowerCase().startsWith('s'),('r')) {
+          aReturn.push(`What size of poutine would you like?`);
+          aReturn.push(`The size options are small, medium, or large`);
+        } else {
+          aReturn.push("Thanks for trying our new ordering system");
+          aReturn.push("Maybe next time")
+        }
+        return aReturn;
+      },
+
+      SIZE: () =>{
+        let aReturn = [];
+        this.stateCur = this.OrderState.DRINKS;
+        aReturn.push("What toppings would you like?")
+        aReturn.push("The toppings we have are bacon, chives, olives, jalapeños, and sausage")
+        return aReturn;
+      },
+
+      DRINKS: () =>{
+        let aReturn = [];
+        this.stateCur = this.OrderState.PICKUP;
+        aReturn.push("Would you like a coke with that?")
+        return aReturn;
+      },
+
+      PICKUP: (sInput) => {
         let aReturn = [];
         this.isDone = true;
         if (sInput.toLowerCase().startsWith('y')) {
-          aReturn.push(`Your rapid test is reserved under the phone number ${this.sFrom}`);
+          aReturn.push(`Your order is reserved under the phone number ${this.sFrom}`);
           let d = new Date();
           d.setMinutes(d.getMinutes() + 120);
-          aReturn.push(`Please pick it up at 123 Tidy St., Acton before ${d.toTimeString()}`);
+          aReturn.push(`Please pick it up at 111 Gravy. Ave., Poutine City before ${d.toTimeString()}`);
         } else {
-          aReturn.push("Thanks for trying our reservation system");
+          aReturn.push("Thanks for trying our new ordering system");
           aReturn.push("Maybe next time")
         }
         return aReturn;
@@ -36,4 +65,4 @@ class RapidTestOrder {
   }
 }
 
-export { RapidTestOrder }
+export { PoutineOrder }

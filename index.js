@@ -1,4 +1,4 @@
-import {RapidTestOrder} from "./RapidTestOrder.js";
+import {PoutineOrder} from "./RapidTestOrder.js";
 import express from 'express';
 
 const app = express();
@@ -6,7 +6,6 @@ const port = process.env.PORT || parseInt(process.argv.pop()) || 3002;
 
 // Create a new express application instance
 
-app.use(express.urlencoded({ extended: true }));
 app.use(express.static("www"));
 let oOrders = {};
 app.post("/sms", (req, res) => {
